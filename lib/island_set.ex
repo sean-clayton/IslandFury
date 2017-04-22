@@ -7,6 +7,10 @@ defmodule IslandFury.IslandSet do
     Agent.start_link(fn -> initialized_set() end)
   end
 
+  def get_state(island_set) do
+    Agent.get(island_set, fn state -> state end)
+  end
+
   def initialized_set() do
     Enum.reduce(keys(), %IslandSet{}, fn key, set ->
       {:ok, island} = Island.start_link
